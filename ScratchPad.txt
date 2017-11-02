@@ -7,7 +7,7 @@ I) Install node.js which is used to build backends in javascript. This installs 
       a) Add path to /usr/local/nodejs/bin in /etc/environment
       b) source /etc/environment
     Correct way:
-      a) export REACT_HOME="/home/mohammad/Desktop/eye"
+      a) export REACT_HOME="/usr/local/nodejs/bin"
       b) export PATH=$PATH:$REACT_HOME
       c) source ~/.bashrc
 
