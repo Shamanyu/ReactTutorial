@@ -137,12 +137,38 @@ class Counter extends Component {
 class CounterApp extends Component {
   render() {
     return (
-      <Counter increment='1.5' decrement='1'/>
+      <div>
+        <Counter increment='2' decrement='0'/>
+        <Counter increment='2' decrement='1'/>
+        <Counter increment='2' decrement='2'/>
+      </div>
     );
   }
 }
 
-export default CounterApp;
+// export default CounterApp;
+
+class Toggle extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {isToggleOn: true};
+    this.handleClick = this.handleClick.bind(this);
+  }
+  handleClick() {
+    this.setState(prevState => ({
+      isToggleOn: !prevState.isToggleOn
+    }));
+  }
+  render() {
+    return (
+      <button onClick={this.handleClick}>
+        {this.state.isToggleOn ? 'ON' : 'OFF'}
+      </button>
+    );
+  }
+}
+
+export default Toggle;
 
 // class App extends React.Component {
 //   render() {

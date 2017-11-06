@@ -6,13 +6,16 @@ import HelloWorld from './App';
 import WelcomeApp from './App';
 import ClockApp from './App';
 import CounterApp from './App';
+import Toggle from './App';
 import registerServiceWorker from './registerServiceWorker';
 
 // ReactDOM.render(<App />, document.getElementById('root'));
 // ReactDOM.render(<HelloWorld />, document.getElementById('root'));
 // ReactDOM.render(<WelcomeApp />, document.getElementById('root'));
 // ReactDOM.render(<ClockApp />, document.getElementById('root'));
-ReactDOM.render(<CounterApp />, document.getElementById('root'));
+// ReactDOM.render(<CounterApp />, document.getElementById('root'));
+ReactDOM.render(<Toggle />, document.getElementById('root'));
+
 
 // function formatName(user) {
 //   return user.firstName + user.lastName
