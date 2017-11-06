@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-// import App from './App';
-// import registerServiceWorker from './registerServiceWorker';
+import App from './App';
+import registerServiceWorker from './registerServiceWorker';
 
 // function formatName(user) {
 //   return user.firstName + user.lastName
@@ -244,3 +244,36 @@ import './index.css';
 //   document.getElementById('root')
 // );
 
+// class App extends React.Component {
+//   render() {
+//     return (
+//       <div>
+//         <Header/>
+//         <Content/>
+//       </div>
+//     );
+//   }
+// }
+
+// class Header extends React.Component {
+//   render() {
+//     return (
+//       <div>
+//         <h1>Header</h1>
+//       </div>
+//     );
+//   }
+// }
+
+// class Content extends React.Component {
+//   render() {
+//     return (
+//       <div>
+//         <h2>Content</h2>
+//         <p>The content text!!!</p>
+//       </div>
+//     );
+//   }
+// }
+
+ReactDOM.render(<App />, document.getElementById('root'));
