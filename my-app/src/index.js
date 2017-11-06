@@ -7,6 +7,7 @@ import WelcomeApp from './App';
 import ClockApp from './App';
 import CounterApp from './App';
 import Toggle from './App';
+import GreetingApp from './App';
 import registerServiceWorker from './registerServiceWorker';
 
 // ReactDOM.render(<App />, document.getElementById('root'));
@@ -14,8 +15,8 @@ import registerServiceWorker from './registerServiceWorker';
 // ReactDOM.render(<WelcomeApp />, document.getElementById('root'));
 // ReactDOM.render(<ClockApp />, document.getElementById('root'));
 // ReactDOM.render(<CounterApp />, document.getElementById('root'));
-ReactDOM.render(<Toggle />, document.getElementById('root'));
-
+// ReactDOM.render(<Toggle />, document.getElementById('root'));
+ReactDOM.render(<GreetingApp />, document.getElementById('root'));
 
 // function formatName(user) {
 //   return user.firstName + user.lastName
