@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
+import butler_image from './login_background.jpg';
 import './App.css';
 
 class App extends Component {
@@ -292,7 +293,9 @@ class MailBoxApp extends Component {
   render() {
     const messages = this.state.messages;
     return (
-      <MailBox unreadMessages={messages} />
+      <div className="background-image">
+        <MailBox unreadMessages={messages} />
+      </div>
     );
   }
 }
