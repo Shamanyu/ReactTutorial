@@ -263,7 +263,41 @@ class GreetingApp extends Component {
   }
 }
 
-export default GreetingApp;
+// export default GreetingApp;
+
+class MailBox extends Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div>
+        <h1>Hello!</h1>
+        {this.props.unreadMessages.length > 0 &&
+          <h2>
+            You have {this.props.unreadMessages.length} unread messages.
+          </h2>
+        }
+      </div>
+    );
+  }
+}
+
+class MailBoxApp extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {'messages':['React', 'Re: React', 'Re:Re: React']};
+    // this.state = {'messages':[]};
+  }
+  render() {
+    const messages = this.state.messages;
+    return (
+      <MailBox unreadMessages={messages} />
+    );
+  }
+}
+
+export default MailBoxApp;
 
 // class App extends React.Component {
 //   render() {
