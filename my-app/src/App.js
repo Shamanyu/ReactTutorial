@@ -53,7 +53,7 @@ class LayoutApp extends React.Component {
   }
 }
 
-export default LayoutApp;
+// export default LayoutApp;
 
 class HelloWorld extends Component {
   render() {
@@ -335,3 +335,4 @@ class MailBoxApp extends Component {
 }
 
 // export default MailBoxApp;
+

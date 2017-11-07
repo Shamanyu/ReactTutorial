@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-//import App from './App';
+import App from './App';
 import LayoutApp from './App';
 import HelloWorld from './App';
 import WelcomeApp from './App';
@@ -13,13 +13,14 @@ import MailBoxApp from './App';
 import registerServiceWorker from './registerServiceWorker';
 
 // ReactDOM.render(<App />, document.getElementById('root'));
+// ReactDOM.render(<LayoutApp />, document.getElementById('root'));
 // ReactDOM.render(<HelloWorld />, document.getElementById('root'));
 // ReactDOM.render(<WelcomeApp />, document.getElementById('root'));
 // ReactDOM.render(<ClockApp />, document.getElementById('root'));
 // ReactDOM.render(<CounterApp />, document.getElementById('root'));
 // ReactDOM.render(<Toggle />, document.getElementById('root'));
 // ReactDOM.render(<GreetingApp />, document.getElementById('root'));
-ReactDOM.render(<MailBoxApp />, document.getElementById('root'));
+// ReactDOM.render(<MailBoxApp />, document.getElementById('root'));
 
 // function formatName(user) {
 //   return user.firstName + user.lastName
