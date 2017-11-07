@@ -710,30 +710,57 @@ class WelcomeDialog extends Component {
 
 // export default WelcomeDialog;
 
-class SplitPane extends Component {
+// class SplitPane extends Component {
+//   render() {
+//     return (
+//       <div className="SplitPane">
+//         <div className="SplitPane-Left">
+//           {this.props.left}
+//         </div>
+//         <div className="SplitPane-Right">
+//           {this.props.right}
+//         </div>
+//       </div>
+//     );
+//   }
+// }
+
+// class PaneApp extends Component {
+//   render () {
+//     return (
+//       <SplitPane
+//         left={<Contacts />}
+//         right={<Chat />}
+//       />
+//     );
+//   }
+// }
+
+// export default PaneApp;
+
+class Dialog extends Component {
   render() {
     return (
-      <div className="SplitPane">
-        <div className="SplitPane-Left">
-          {this.props.left}
-        </div>
-        <div className="SplitPane-Right">
-          {this.props.right}
-        </div>
-      </div>
+      <FancyBorder color="blue">
+        <h1 className="Dialog-title">
+          {this.props.title}
+        </h1>
+        <p className="Dialog-message">
+          {this.props.message}
+        </p>
+      </FancyBorder>
     );
   }
 }
 
-class PaneApp extends Component {
-  render () {
+class WelcomeDialogAgain extends Component {
+  render() {
     return (
-      <SplitPane
-        left={<Contacts />}
-        right={<Chat />}
-      />
+      <Dialog
+        title="Welcome"
+        message="Thank you for visiting our spacecraft!" />
     );
   }
 }
 
-export default PaneApp;
+export default WelcomeDialogAgain;

@@ -20,6 +20,7 @@ import Reservation from './App';
 import Calculator from './App';
 import WelcomeDialog from './App';
 import PaneApp from './App';
+import WelcomeDialogAgain from './App';
 import registerServiceWorker from './registerServiceWorker';
 
 // ReactDOM.render(<App />, document.getElementById('root'));
@@ -40,4 +41,5 @@ import registerServiceWorker from './registerServiceWorker';
 // ReactDOM.render(<Reservation />, document.getElementById('root'));
 // ReactDOM.render(<Calculator />, document.getElementById('root'));
 // ReactDOM.render(<WelcomeDialog />, document.getElementById('root'));
-ReactDOM.render(<PaneApp />, document.getElementById('root'));
+// ReactDOM.render(<PaneApp />, document.getElementById('root'));
+ReactDOM.render(<WelcomeDialogAgain />, document.getElementById('root'));
