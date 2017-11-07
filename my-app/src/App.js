@@ -709,3 +709,31 @@ class WelcomeDialog extends Component {
 }
 
 // export default WelcomeDialog;
+
+class SplitPane extends Component {
+  render() {
+    return (
+      <div className="SplitPane">
+        <div className="SplitPane-Left">
+          {this.props.left}
+        </div>
+        <div className="SplitPane-Right">
+          {this.props.right}
+        </div>
+      </div>
+    );
+  }
+}
+
+class PaneApp extends Component {
+  render () {
+    return (
+      <SplitPane
+        left={<Contacts />}
+        right={<Chat />}
+      />
+    );
+  }
+}
+
+export default PaneApp;

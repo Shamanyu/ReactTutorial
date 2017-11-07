@@ -19,6 +19,7 @@ import FlavorForm from './App';
 import Reservation from './App';
 import Calculator from './App';
 import WelcomeDialog from './App';
+import PaneApp from './App';
 import registerServiceWorker from './registerServiceWorker';
 
 // ReactDOM.render(<App />, document.getElementById('root'));
@@ -38,4 +39,5 @@ import registerServiceWorker from './registerServiceWorker';
 // ReactDOM.render(<FlavorForm />, document.getElementById('root'));
 // ReactDOM.render(<Reservation />, document.getElementById('root'));
 // ReactDOM.render(<Calculator />, document.getElementById('root'));
-ReactDOM.render(<WelcomeDialog />, document.getElementById('root'));
+// ReactDOM.render(<WelcomeDialog />, document.getElementById('root'));
+ReactDOM.render(<PaneApp />, document.getElementById('root'));
