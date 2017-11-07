@@ -13,6 +13,7 @@ import MailBoxApp from './App';
 import Page from './App';
 import Container from './App';
 import BlogApp from './App';
+import NameForm from './App';
 import registerServiceWorker from './registerServiceWorker';
 
 // ReactDOM.render(<App />, document.getElementById('root'));
@@ -26,4 +27,5 @@ import registerServiceWorker from './registerServiceWorker';
 // ReactDOM.render(<MailBoxApp />, document.getElementById('root'));
 // ReactDOM.render(<Page />, document.getElementById('root'));
 // ReactDOM.render(<Container />, document.getElementById('root'));
-ReactDOM.render(<BlogApp />, document.getElementById('root'));
+// ReactDOM.render(<BlogApp />, document.getElementById('root'));
+ReactDOM.render(<NameForm />, document.getElementById('root'));
