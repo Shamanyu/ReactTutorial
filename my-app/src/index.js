@@ -17,6 +17,7 @@ import NameForm from './App';
 import EssayForm from './App';
 import FlavorForm from './App';
 import Reservation from './App';
+import Calculator from './App';
 import registerServiceWorker from './registerServiceWorker';
 
 // ReactDOM.render(<App />, document.getElementById('root'));
@@ -34,4 +35,5 @@ import registerServiceWorker from './registerServiceWorker';
 // ReactDOM.render(<NameForm />, document.getElementById('root'));
 // ReactDOM.render(<EssayForm />, document.getElementById('root'));
 // ReactDOM.render(<FlavorForm />, document.getElementById('root'));
-ReactDOM.render(<Reservation />, document.getElementById('root'));
+// ReactDOM.render(<Reservation />, document.getElementById('root'));
+ReactDOM.render(<Calculator />, document.getElementById('root'));
