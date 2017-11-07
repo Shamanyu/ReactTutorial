@@ -273,9 +273,9 @@ class MailBox extends Component {
   render() {
     return (
       <div>
-        <h1>Hello!</h1>
+        <h1 style={{color:'red'}}>Hello!</h1>
         {this.props.unreadMessages.length > 0 &&
-          <h2>
+          <h2 style={{color:'red'}}>
             You have {this.props.unreadMessages.length} unread messages.
           </h2>
         }
@@ -293,7 +293,7 @@ class MailBoxApp extends Component {
   render() {
     const messages = this.state.messages;
     return (
-      <div className="background-image">
+      <div className="App-background_image">
         <MailBox unreadMessages={messages} />
       </div>
     );
