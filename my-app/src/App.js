@@ -376,4 +376,80 @@ class Page extends Component {
   }
 }
 
-export default Page;
+// export default Page;
+
+class ArrayDisplay extends Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <ul>{this.props.members}</ul>
+    );
+  }
+}
+
+class Container extends Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    const numbers = [1,2,3,4,5];
+    const doubled = numbers.map((number) => number*2);
+    const listItems = doubled.map((number) =>
+      <li key={number.toString()}>{number}</li>
+    );
+    return (
+      <ArrayDisplay members={listItems} />
+    );
+  }
+}
+
+// export default Container;
+
+class Blog extends Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    const sidebar = (
+      <ul>
+        {this.props.posts.map((post) =>
+          <li key={post.id}>
+            {post.title}
+          </li>
+        )}
+      </ul>
+    );
+    const content = this.props.posts.map((post) =>
+      <div key={post.id}>
+        <h3>{post.title}</h3>
+        <p>{post.content}</p>
+      </div>
+    );
+    return (
+      <div>
+        {sidebar}
+        <hr />
+        {content}
+      </div>
+    );
+  }
+}
+
+class BlogApp extends Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    const posts = [
+      {id: 1, title: 'Hello World', content: 'Welcome to learning React!'},
+      {id: 2, title: 'Installation', content: 'You can install React from npm'}
+    ];
+    return (
+      <Blog posts={posts} />
+    );
+  }
+}
+
+export default BlogApp;
