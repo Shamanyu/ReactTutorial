@@ -65,6 +65,10 @@ import registerServiceWorker from './registerServiceWorker';
 
 import { createStore } from 'redux';
 
+// import { expect } from 'expect';
+
+import expect from 'expect';
+
 const counter = (state = 0, action) => {
   switch(action.type) {
     case 'INCREMENT':
@@ -75,6 +79,19 @@ const counter = (state = 0, action) => {
       return state
   }
 }
+
+const addCounter = (list) => {
+  list.push(0);
+  return list;
+};
+
+const testAddCounter = () => {
+  const listBefore = [];
+  const listAfter = [0];
+  expect(
+    addCounter(listBefore)
+  ).toEqual(listAfter);
+};
 
 const store = createStore(counter)
 
@@ -99,6 +116,9 @@ const render = () => {
 
 store.subscribe(render);
 render();
+
+testAddCounter();
+console.log('All tests passed');
 
 // store.dispatch({ type: 'INCREMENT' })
 // store.dispatch({ type: 'INCREMENT' })
