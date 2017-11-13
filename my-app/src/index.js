@@ -21,6 +21,7 @@ import Calculator from './App';
 import WelcomeDialog from './App';
 import PaneApp from './App';
 import WelcomeDialogAgain from './App';
+import CounterAppAgain from './App';
 import registerServiceWorker from './registerServiceWorker';
 
 // ReactDOM.render(<App />, document.getElementById('root'));
@@ -78,7 +79,10 @@ const counter = (state = 0, action) => {
 const store = createStore(counter)
 
 const render = () => {
-  document.body.innerText = store.getState();
+  ReactDOM.render(
+    <CounterAppAgain value={store.getState()}/>,
+    document.getElementById('root')
+  );
 };
 
 store.subscribe(render);

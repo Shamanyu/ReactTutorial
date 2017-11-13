@@ -763,4 +763,29 @@ class WelcomeDialogAgain extends Component {
   }
 }
 
-export default WelcomeDialogAgain;
+// export default WelcomeDialogAgain;
+
+class CounterAgain extends Component {
+  render() {
+    return (
+      <div>
+        <h1>Hello, world!</h1>
+        <h2>The counter is at {this.props.value}.</h2>
+      </div>
+    );
+  }
+}
+
+class CounterAppAgain extends Component {
+  render() {
+    return (
+      <div>
+        <CounterAgain value={this.props.value}/>
+        <CounterAgain value={this.props.value}/>
+        <CounterAgain value={this.props.value}/>
+      </div>
+    );
+  }
+}
+
+export default CounterAppAgain;
