@@ -69,6 +69,10 @@ import { createStore } from 'redux';
 
 import expect from 'expect';
 
+// import { deepFreeze } from 'deep-freeze'
+
+import deepFreeze from 'deep-freeze';
+
 const counter = (state = 0, action) => {
   switch(action.type) {
     case 'INCREMENT':
@@ -81,13 +85,16 @@ const counter = (state = 0, action) => {
 }
 
 const addCounter = (list) => {
-  list.push(0);
-  return list;
+  // return list.concat([0]);
+  return [...list, 0]; 
 };
 
 const testAddCounter = () => {
   const listBefore = [];
   const listAfter = [0];
+
+  deepFreeze(listBefore);
+
   expect(
     addCounter(listBefore)
   ).toEqual(listAfter);
