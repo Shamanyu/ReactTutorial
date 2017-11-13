@@ -769,8 +769,10 @@ class CounterAgain extends Component {
   render() {
     return (
       <div>
-        <h1>Hello, world!</h1>
+        <h1>{this.props.text}</h1>
         <h2>The counter is at {this.props.value}.</h2>
+        <button onClick={this.props.onIncrement}>+</button>
+        <button onClick={this.props.onDecrement}>-</button>
       </div>
     );
   }
@@ -780,9 +782,9 @@ class CounterAppAgain extends Component {
   render() {
     return (
       <div>
-        <CounterAgain value={this.props.value}/>
-        <CounterAgain value={this.props.value}/>
-        <CounterAgain value={this.props.value}/>
+        <CounterAgain text="Counter 1" value={this.props.value} onIncrement={this.props.onIncrement} onDecrement={this.props.onDecrement} />
+        <CounterAgain text="Counter 2" value={this.props.value} onIncrement={this.props.onIncrement} onDecrement={this.props.onDecrement} />
+        <CounterAgain text="Counter 3" value={this.props.value} onIncrement={this.props.onIncrement} onDecrement={this.props.onDecrement} />
       </div>
     );
   }

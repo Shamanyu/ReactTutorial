@@ -45,19 +45,6 @@ import registerServiceWorker from './registerServiceWorker';
 // ReactDOM.render(<PaneApp />, document.getElementById('root'));
 // ReactDOM.render(<WelcomeDialogAgain />, document.getElementById('root'));
 
-import { createStore } from 'redux';
-
-const counter = (state = 0, action) => {
-  switch(action.type) {
-    case 'INCREMENT':
-      return state + 1
-    case 'DECREMENT':
-      return state - 1
-    default:
-      return state
-  }
-}
-
 // const createStore = (reducer) => {
 //   let state;
 //   let listeners = [];
@@ -76,11 +63,36 @@ const counter = (state = 0, action) => {
 //   return { getState, dispatch, subscribe };
 // }
 
+import { createStore } from 'redux';
+
+const counter = (state = 0, action) => {
+  switch(action.type) {
+    case 'INCREMENT':
+      return state + 1
+    case 'DECREMENT':
+      return state - 1
+    default:
+      return state
+  }
+}
+
 const store = createStore(counter)
 
 const render = () => {
   ReactDOM.render(
-    <CounterAppAgain value={store.getState()}/>,
+    <CounterAppAgain 
+      value={store.getState()}
+      onIncrement={() => 
+        store.dispatch({
+          type: 'INCREMENT'
+        })
+      }
+      onDecrement={() =>
+        store.dispatch({
+          type: 'DECREMENT'
+        })
+      }
+    />,
     document.getElementById('root')
   );
 };
@@ -92,6 +104,6 @@ render();
 // store.dispatch({ type: 'INCREMENT' })
 // store.dispatch({ type: 'DECREMENT' })
 
-document.addEventListener('click', () => {
-  store.dispatch({ type: 'INCREMENT'});
-});
+// document.addEventListener('click', () => {
+//   store.dispatch({ type: 'INCREMENT'});
+// });
