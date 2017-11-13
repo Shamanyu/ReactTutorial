@@ -46,7 +46,7 @@ import registerServiceWorker from './registerServiceWorker';
 
 import { createStore } from 'redux';
 
-function counter(state = 0, action) {
+const counter = (state = 0, action) => {
   switch(action.type) {
     case 'INCREMENT':
       return state + 1
@@ -57,12 +57,19 @@ function counter(state = 0, action) {
   }
 }
 
-let store = createStore(counter)
+const store = createStore(counter)
 
-store.subscribe(() =>
-  console.log(store.getState())
-)
+const render = () => {
+  document.body.innerText = store.getState();
+};
 
-store.dispatch({ type: 'INCREMENT' })
-store.dispatch({ type: 'INCREMENT' })
-store.dispatch({ type: 'DECREMENT' })
+store.subscribe(render);
+render();
+
+// store.dispatch({ type: 'INCREMENT' })
+// store.dispatch({ type: 'INCREMENT' })
+// store.dispatch({ type: 'DECREMENT' })
+
+document.addEventListener('click', () => {
+  store.dispatch({ type: 'INCREMENT'});
+});
