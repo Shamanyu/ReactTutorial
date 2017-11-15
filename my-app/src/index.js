@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
@@ -22,6 +22,7 @@ import WelcomeDialog from './App';
 import PaneApp from './App';
 import WelcomeDialogAgain from './App';
 import CounterAppAgain from './App';
+import TodoApp from './App';
 import registerServiceWorker from './registerServiceWorker';
 
 import { createStore } from 'redux';
@@ -49,6 +50,8 @@ import deepFreeze from 'deep-freeze';
 // ReactDOM.render(<WelcomeDialog />, document.getElementById('root'));
 // ReactDOM.render(<PaneApp />, document.getElementById('root'));
 // ReactDOM.render(<WelcomeDialogAgain />, document.getElementById('root'));
+// ReactDOM.render(<CounterAppAgain />, document.getElementById('root'));
+// ReactDOM.render(<TodoApp />, document.getElementById('root'));
 
 // const createStore = (reducer) => {
 //   let state;
@@ -354,12 +357,50 @@ testAddTodo();
 testToggleTodo();
 console.log('All tests passed');
 
+let nextTodoId = 0;
+class TodoAppAgain extends Component {
+  render() {
+    return (
+      <div>
+        <input ref={node => {
+          this.input = node;
+        }} />
+        <button onClick={() => {
+          store.dispatch({
+            type: 'ADD_TODO',
+            text: this.input.value,
+            id: nextTodoId++
+          });
+          this.input.value = '';
+        }}>
+          Add Todo
+        </button>
+        <ul>
+          {this.props.todos.map(todo =>
+            <li key={todo.id}>
+              {todo.text}
+            </li>
+          )}
+        </ul>
+      </div>
+    );
+  }
+}
+
 const todoApp = combineReducers({
   todos,
   visibilityFilter
 });
 const store = createStore(todoApp);
 
-console.log('Initial state:');
-console.log(store.getState());
-console.log('----------------');
+const render = () => {
+  ReactDOM.render(
+    <TodoAppAgain 
+      todos={store.getState().todos}
+    />,
+    document.getElementById('root')
+  );
+};
+
+store.subscribe(render);
+render();
