@@ -24,6 +24,10 @@ import WelcomeDialogAgain from './App';
 import CounterAppAgain from './App';
 import registerServiceWorker from './registerServiceWorker';
 
+import { createStore } from 'redux';
+import expect from 'expect';
+import deepFreeze from 'deep-freeze';
+
 // ReactDOM.render(<App />, document.getElementById('root'));
 // ReactDOM.render(<LayoutApp />, document.getElementById('root'));
 // ReactDOM.render(<HelloWorld />, document.getElementById('root'));
@@ -62,16 +66,6 @@ import registerServiceWorker from './registerServiceWorker';
 //   dispatch({});
 //   return { getState, dispatch, subscribe };
 // }
-
-import { createStore } from 'redux';
-
-// import { expect } from 'expect';
-
-import expect from 'expect';
-
-// import { deepFreeze } from 'deep-freeze'
-
-import deepFreeze from 'deep-freeze';
 
 const counter = (state = 0, action) => {
   switch(action.type) {
@@ -184,6 +178,41 @@ const testDecrementCounter = () => {
 //   ).toEqual(todoAfter)
 // };
 
+
+// import { expect } from 'expect';
+
+
+// import { deepFreeze } from 'deep-freeze'
+
+// const store = createStore(counter);
+
+// const render = () => {
+//   ReactDOM.render(
+//     <CounterAppAgain 
+//       value={store.getState()}
+//       onIncrement={() => 
+//         store.dispatch({
+//           type: 'INCREMENT'
+//         })
+//       }
+//       onDecrement={() =>
+//         store.dispatch({
+//           type: 'DECREMENT'
+//         })
+//       }
+//     />,
+//     document.getElementById('root')
+//   );
+// };
+
+// store.subscribe(render);
+// render();
+
+// testAddCounter();
+// testRemoveCounter();
+// testIncrementCounter();
+// testDecrementCounter();
+
 const todo = (state = [], action) => {
   switch (action.type) {
     case 'ADD_TODO':
@@ -280,34 +309,6 @@ const testToggleTodo = () => {
   ).toEqual(stateAfter);
 }
 
-const store = createStore(counter);
-
-const render = () => {
-  ReactDOM.render(
-    <CounterAppAgain 
-      value={store.getState()}
-      onIncrement={() => 
-        store.dispatch({
-          type: 'INCREMENT'
-        })
-      }
-      onDecrement={() =>
-        store.dispatch({
-          type: 'DECREMENT'
-        })
-      }
-    />,
-    document.getElementById('root')
-  );
-};
-
-store.subscribe(render);
-render();
-
-testAddCounter();
-testRemoveCounter();
-testIncrementCounter();
-testDecrementCounter();
 testAddTodo();
 testToggleTodo();
 console.log('All tests passed');
