@@ -360,6 +360,10 @@ console.log('All tests passed');
 let nextTodoId = 0;
 class TodoAppAgain extends Component {
   render() {
+    const visibleTodos = getVisibleTodos(
+      this.props.todos,
+      this.props.visibilityFilter
+    );
     return (
       <div>
         <input ref={node => {
@@ -376,7 +380,7 @@ class TodoAppAgain extends Component {
           Add Todo
         </button>
         <ul>
-          {this.props.todos.map(todo =>
+          {visibleTodos.map(todo =>
             <li key={todo.id}
                 onClick={() => {
                   store.dispatch({
@@ -395,10 +399,69 @@ class TodoAppAgain extends Component {
             </li>
           )}
         </ul>
+        <p>
+          Show:
+          {' '}
+          <FilterLink
+            filter='SHOW_ALL'
+          >
+            All
+          </FilterLink>
+          {' '}
+          <FilterLink
+            filter='SHOW_ACTIVE'
+          >
+            Active
+          </FilterLink>
+          {' '}
+          <FilterLink
+            filter='SHOW_COMPLETED'
+          >
+            Completed
+          </FilterLink>
+        </p>
       </div>
     );
   }
 }
+
+const getVisibleTodos = (
+  todos,
+  filter
+) => {
+  switch(filter) {
+    case 'SHOW_ALL':
+      return todos;
+    case 'SHOW_COMPLETED':
+      return todos.filter(
+        t => t.completed
+      );
+    case 'SHOW_ACTIVE':
+      return todos.filter(
+        t => !t.completed
+      );
+
+  }
+}
+
+const FilterLink =({
+  filter,
+  children
+}) => {
+  return (
+    <a href='#'
+      onClick={e => {
+        e.preventDefault();
+        store.dispatch({
+          type: 'SET_VISIBILITY_FILTER',
+          filter
+        })
+      }}
+    >
+      {children}
+    </a>
+  );
+};
 
 const todoApp = combineReducers({
   todos,
@@ -409,7 +472,7 @@ const store = createStore(todoApp);
 const render = () => {
   ReactDOM.render(
     <TodoAppAgain 
-      todos={store.getState().todos}
+      {...store.getState()}
     />,
     document.getElementById('root')
   );
