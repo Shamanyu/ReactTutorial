@@ -25,6 +25,7 @@ import CounterAppAgain from './App';
 import registerServiceWorker from './registerServiceWorker';
 
 import { createStore } from 'redux';
+import { combineReducers } from 'redux';
 import expect from 'expect';
 import deepFreeze from 'deep-freeze';
 
@@ -260,18 +261,23 @@ const visibilityFilter = (
   }
 };
 
-const todoApp = (state = {}, action) => {
-  return {
-    todos: todos(
-      state.todos,
-      action
-    ),
-    visibilityFilter: visibilityFilter(
-      state.visibilityFilter,
-      action
-    )
-  };
-}
+// const todoApp = (state = {}, action) => {
+//   return {
+//     todos: todos(
+//       state.todos,
+//       action
+//     ),
+//     visibilityFilter: visibilityFilter(
+//       state.visibilityFilter,
+//       action
+//     )
+//   };
+// }
+
+const todoApp = combineReducers({
+  todos,
+  visibilityFilter
+});
 
 const testAddTodo = () => {
   const stateBefore = [];
