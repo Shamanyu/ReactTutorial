@@ -1,29 +1,29 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import LayoutApp from './App';
-import HelloWorld from './App';
-import WelcomeApp from './App';
-import ClockApp from './App';
-import CounterApp from './App';
-import Toggle from './App';
-import GreetingApp from './App';
-import MailBoxApp from './App';
-import Page from './App';
-import Container from './App';
-import BlogApp from './App';
-import NameForm from './App';
-import EssayForm from './App';
-import FlavorForm from './App';
-import Reservation from './App';
-import Calculator from './App';
-import WelcomeDialog from './App';
-import PaneApp from './App';
-import WelcomeDialogAgain from './App';
-import CounterAppAgain from './App';
-import TodoApp from './App';
-import registerServiceWorker from './registerServiceWorker';
+// import App from './App';
+// import LayoutApp from './App';
+// import HelloWorld from './App';
+// import WelcomeApp from './App';
+// import ClockApp from './App';
+// import CounterApp from './App';
+// import Toggle from './App';
+// import GreetingApp from './App';
+// import MailBoxApp from './App';
+// import Page from './App';
+// import Container from './App';
+// import BlogApp from './App';
+// import NameForm from './App';
+// import EssayForm from './App';
+// import FlavorForm from './App';
+// import Reservation from './App';
+// import Calculator from './App';
+// import WelcomeDialog from './App';
+// import PaneApp from './App';
+// import WelcomeDialogAgain from './App';
+// import CounterAppAgain from './App';
+// import TodoApp from './App';
+// import registerServiceWorker from './registerServiceWorker';
 
 import { createStore } from 'redux';
 import { combineReducers } from 'redux';
@@ -71,87 +71,87 @@ import deepFreeze from 'deep-freeze';
 //   return { getState, dispatch, subscribe };
 // }
 
-const counter = (state = 0, action) => {
-  switch(action.type) {
-    case 'INCREMENT':
-      return state + 1
-    case 'DECREMENT':
-      return state - 1
-    default:
-      return state
-  }
-}
+// const counter = (state = 0, action) => {
+//   switch(action.type) {
+//     case 'INCREMENT':
+//       return state + 1
+//     case 'DECREMENT':
+//       return state - 1
+//     default:
+//       return state
+//   }
+// }
 
-const addCounter = (list) => {
-  return [...list, 0]; 
-};
+// const addCounter = (list) => {
+//   return [...list, 0]; 
+// };
 
-const testAddCounter = () => {
-  const listBefore = [];
-  const listAfter = [0];
+// const testAddCounter = () => {
+//   const listBefore = [];
+//   const listAfter = [0];
 
-  deepFreeze(listBefore);
+//   deepFreeze(listBefore);
 
-  expect(
-    addCounter(listBefore)
-  ).toEqual(listAfter);
-};
+//   expect(
+//     addCounter(listBefore)
+//   ).toEqual(listAfter);
+// };
 
-const removeCounter = (list, index) => {
-  return [
-    ...list.slice(0, index),
-    ...list.slice(index + 1)
-  ];
-};
+// const removeCounter = (list, index) => {
+//   return [
+//     ...list.slice(0, index),
+//     ...list.slice(index + 1)
+//   ];
+// };
 
-const testRemoveCounter = () => {
-  const listBefore = [0, 10, 20];
-  const listAfter = [0, 20];
+// const testRemoveCounter = () => {
+//   const listBefore = [0, 10, 20];
+//   const listAfter = [0, 20];
 
-  deepFreeze(listBefore);
+//   deepFreeze(listBefore);
 
-  expect(
-    removeCounter(listBefore, 1)
-  ).toEqual(listAfter);
-};
+//   expect(
+//     removeCounter(listBefore, 1)
+//   ).toEqual(listAfter);
+// };
 
-const incrementCounter = (list, index) => {
-  return [
-    ...list.slice(0, index),
-    list[index]+1,
-    ...list.slice(index+1)
-  ];
-};
+// const incrementCounter = (list, index) => {
+//   return [
+//     ...list.slice(0, index),
+//     list[index]+1,
+//     ...list.slice(index+1)
+//   ];
+// };
 
-const testIncrementCounter = () => {
-  const listBefore = [0, 10, 20];
-  const listAfter = [0, 11, 20];
+// const testIncrementCounter = () => {
+//   const listBefore = [0, 10, 20];
+//   const listAfter = [0, 11, 20];
 
-  deepFreeze(listBefore);
+//   deepFreeze(listBefore);
 
-  expect(
-    incrementCounter(listBefore, 1)
-  ).toEqual(listAfter);
-};
+//   expect(
+//     incrementCounter(listBefore, 1)
+//   ).toEqual(listAfter);
+// };
 
-const decrementCounter = (list, index) => {
-  return [
-    ...list.slice(0, index),
-    list[index]-1,
-    ...list.slice(index+1)
-  ];
-};
+// const decrementCounter = (list, index) => {
+//   return [
+//     ...list.slice(0, index),
+//     list[index]-1,
+//     ...list.slice(index+1)
+//   ];
+// };
 
-const testDecrementCounter = () => {
-  const listBefore = [0, 10, 20];
-  const listAfter = [0, 9, 20];
+// const testDecrementCounter = () => {
+//   const listBefore = [0, 10, 20];
+//   const listAfter = [0, 9, 20];
 
-  deepFreeze(listBefore);
+//   deepFreeze(listBefore);
 
-  expect(
-    decrementCounter(listBefore, 1)
-  ).toEqual(listAfter);
-};
+//   expect(
+//     decrementCounter(listBefore, 1)
+//   ).toEqual(listAfter);
+// };
 
 // const toggleTodo = (todo) => {
 //   // return Object.assign({}, todo, {
@@ -468,7 +468,8 @@ const getVisibleTodos = (
       return todos.filter(
         t => !t.completed
       );
-
+    default:
+      return todos;
   }
 }
 
