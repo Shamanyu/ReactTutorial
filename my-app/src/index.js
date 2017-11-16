@@ -362,20 +362,9 @@ console.log('All tests passed');
 
 //TodoAppAgain class
 let nextTodoId = 0;
-const TodoAppAgain = ({
-  todos,
-  visibilityFilter
-}) => (
+const TodoAppAgain = () => (
   <div>
-    <AddTodo
-      onAddClick={text =>
-        store.dispatch({
-          type: 'ADD_TODO',
-          id: nextTodoId++,
-          text
-        })
-      }
-    />
+    <AddTodo />
     <VisibleTodoList />
     <Footer />
   </div>
@@ -414,9 +403,7 @@ const TodoList = ({
   </ul>
 );
 
-const AddTodo = ({
-  onAddClick
-}) => {
+const AddTodo = () => {
   let input;
   return (
     <div>
@@ -424,7 +411,11 @@ const AddTodo = ({
         input = node;
       }} />
       <button onClick={() => {
-        onAddClick(input.value);
+        store.dispatch({
+          type: 'ADD_TODO',
+          id: nextTodoId++,
+          text: input.value
+        })
         input.value = '';
       }}>
         Add Todo
@@ -566,14 +557,7 @@ const todoApp = combineReducers({
 });
 const store = createStore(todoApp);
 
-const render = () => {
-  ReactDOM.render(
-    <TodoAppAgain 
-      {...store.getState()}
-    />,
-    document.getElementById('root')
-  );
-};
-
-store.subscribe(render);
-render();
+ReactDOM.render(
+  <TodoAppAgain />,
+  document.getElementById('root')
+);
