@@ -360,7 +360,6 @@ testAddTodo();
 testToggleTodo();
 console.log('All tests passed');
 
-
 //TodoAppAgain class
 let nextTodoId = 0;
 const TodoAppAgain = ({
@@ -377,20 +376,7 @@ const TodoAppAgain = ({
         })
       }
     />
-    <TodoList
-      todos={
-        getVisibleTodos(
-          todos,
-          visibilityFilter
-        ) 
-      }
-      onTodoClick={id =>
-        store.dispatch({
-          type: 'TOGGLE_TODO',
-          id
-        })
-      }
-    />
+    <VisibleTodoList />
     <Footer />
   </div>
 );
@@ -539,6 +525,37 @@ class FilterLink extends Component {
       >
         {props.children}
       </Link>
+    );
+  }
+}
+
+class VisibleTodoList extends Component {
+  componentDidMount() {
+    this.unsubscribe = store.subscribe(() =>
+      this.forceUpdate()
+    );
+  }
+  componentWillUnmount() {
+    this.unsubscribe();
+  }
+  render() {
+    const props = this.props;
+    const state = store.getState();
+    return (
+      <TodoList
+        todos={
+          getVisibleTodos(
+            state.todos,
+            state.visibilityFilter
+          )
+        }
+        onTodoClick={id =>
+          store.dispatch({
+            type: 'TOGGLE_TODO',
+            id
+          })
+        }
+      />
     );
   }
 }
