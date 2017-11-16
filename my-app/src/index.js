@@ -217,6 +217,8 @@ import deepFreeze from 'deep-freeze';
 // testIncrementCounter();
 // testDecrementCounter();
 
+
+//Reducers
 const todo = (state = [], action) => {
   switch (action.type) {
     case 'ADD_TODO':
@@ -292,6 +294,7 @@ const visibilityFilter = (
 //   };
 // }
 
+//Test functions for reducers
 const testAddTodo = () => {
   const stateBefore = [];
   const action = {
@@ -357,6 +360,8 @@ testAddTodo();
 testToggleTodo();
 console.log('All tests passed');
 
+
+//TodoAppAgain class
 let nextTodoId = 0;
 class TodoAppAgain extends Component {
   render() {
@@ -370,19 +375,15 @@ class TodoAppAgain extends Component {
     );
     return (
       <div>
-        <input ref={node => {
-          this.input = node;
-        }} />
-        <button onClick={() => {
-          store.dispatch({
-            type: 'ADD_TODO',
-            text: this.input.value,
-            id: nextTodoId++
-          });
-          this.input.value = '';
-        }}>
-          Add Todo
-        </button>
+        <AddTodo
+          onAddClick={text =>
+            store.dispatch({
+              type: 'ADD_TODO',
+              id: nextTodoId++,
+              text
+            })
+          }
+        />
         <TodoList
           todos={visibleTodos}
           onTodoClick={id =>
@@ -421,6 +422,7 @@ class TodoAppAgain extends Component {
   }
 }
 
+// React components
 const Todo = ({
   onClick,
   completed,
@@ -451,7 +453,26 @@ const TodoList = ({
       />
     )}
   </ul>
-)
+);
+
+const AddTodo = ({
+  onAddClick
+}) => {
+  let input;
+  return (
+    <div>
+      <input ref={node => {
+        input = node;
+      }} />
+      <button onClick={() => {
+        onAddClick(input.value);
+        input.value = '';
+      }}>
+        Add Todo
+      </button>
+    </div>
+  );
+};
 
 const getVisibleTodos = (
   todos,
