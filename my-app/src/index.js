@@ -217,55 +217,6 @@ import deepFreeze from 'deep-freeze';
 // testIncrementCounter();
 // testDecrementCounter();
 
-
-//Reducers
-const todo = (state = [], action) => {
-  switch (action.type) {
-    case 'ADD_TODO':
-      return {
-        id: action.id,
-        text: action.text,
-        completed: false
-      };
-    case 'TOGGLE_TODO':
-      if (state.id !== action.id) {
-        return state;
-      }
-      return {
-        ...state,
-        completed: !state.completed
-      };
-    default:
-      return state;
-  }
-};
-
-const todos = (state = [], action) => {
-  switch(action.type) {
-    case 'ADD_TODO':
-      return [
-        ...state,
-        todo(undefined, action)
-      ];
-    case 'TOGGLE_TODO':
-      return state.map(t => todo(t, action));
-    default:
-      return state;
-  }
-};
-
-const visibilityFilter = (
-  state = 'SHOW_ALL',
-  action
-) => {
-  switch (action.type) {
-    case 'SET_VISIBILITY_FILTER':
-      return action.filter;
-    default:
-      return state;
-  }
-};
-
 // const todoApp = (state = {}, action) => {
 //   return {
 //     todos: todos(
@@ -294,7 +245,61 @@ const visibilityFilter = (
 //   };
 // }
 
+//Reducers
+
+// Reducer for todo
+const todo = (state = [], action) => {
+  switch (action.type) {
+    case 'ADD_TODO':
+      return {
+        id: action.id,
+        text: action.text,
+        completed: false
+      };
+    case 'TOGGLE_TODO':
+      if (state.id !== action.id) {
+        return state;
+      }
+      return {
+        ...state,
+        completed: !state.completed
+      };
+    default:
+      return state;
+  }
+};
+
+// Reducer for todo list
+const todos = (state = [], action) => {
+  switch(action.type) {
+    case 'ADD_TODO':
+      return [
+        ...state,
+        todo(undefined, action)
+      ];
+    case 'TOGGLE_TODO':
+      return state.map(t => todo(t, action));
+    default:
+      return state;
+  }
+};
+
+//Reducer for visibility filter
+const visibilityFilter = (
+  state = 'SHOW_ALL',
+  action
+) => {
+  switch (action.type) {
+    case 'SET_VISIBILITY_FILTER':
+      return action.filter;
+    default:
+      return state;
+  }
+};
+
 //Test functions for reducers
+
+//Test function for addTodo reducer
 const testAddTodo = () => {
   const stateBefore = [];
   const action = {
@@ -318,6 +323,7 @@ const testAddTodo = () => {
   ).toEqual(stateAfter);
 };
 
+//Test function for toggleTodo reducer
 const testToggleTodo = () => {
   const stateBefore = [
     {
@@ -356,118 +362,21 @@ const testToggleTodo = () => {
   ).toEqual(stateAfter);
 }
 
+//Call the reducer test functions
 testAddTodo();
 testToggleTodo();
 console.log('All tests passed');
 
-//TodoAppAgain class
-let nextTodoId = 0;
-const TodoAppAgain = () => (
-  <div>
-    <AddTodo />
-    <VisibleTodoList />
-    <Footer />
-  </div>
-);
-
-// React components
-const Todo = ({
-  onClick,
-  completed,
-  text
-}) => (
-  <li onClick={onClick}
-      style={{
-        textDecoration: 
-          completed ?
-            'line-through' :
-            'none'
-      }}
-  >
-    {text}
-  </li>
-);
-
-const TodoList = ({
+//Create a store from all the reducers
+const todoApp = combineReducers({
   todos,
-  onTodoClick
-}) => (
-  <ul>
-    {todos.map(todo =>
-      <Todo
-        key={todo.id}
-        {...todo}
-        onClick={() => onTodoClick(todo.id)}
-      />
-    )}
-  </ul>
-);
+  visibilityFilter
+});
+const store = createStore(todoApp);
 
-const AddTodo = () => {
-  let input;
-  return (
-    <div>
-      <input ref={node => {
-        input = node;
-      }} />
-      <button onClick={() => {
-        store.dispatch({
-          type: 'ADD_TODO',
-          id: nextTodoId++,
-          text: input.value
-        })
-        input.value = '';
-      }}>
-        Add Todo
-      </button>
-    </div>
-  );
-};
+//React components
 
-const Footer = () => (
-  <p>
-    Show:
-    {' '}
-    <FilterLink
-      filter='SHOW_ALL'
-    >
-      All
-    </FilterLink>
-    {', '}
-    <FilterLink
-      filter='SHOW_ACTIVE'
-    >
-      Active
-    </FilterLink>
-    {', '}
-    <FilterLink
-      filter='SHOW_COMPLETED'
-    >
-      Completed
-    </FilterLink>
-  </p>
-)
-
-const getVisibleTodos = (
-  todos,
-  filter
-) => {
-  switch(filter) {
-    case 'SHOW_ALL':
-      return todos;
-    case 'SHOW_COMPLETED':
-      return todos.filter(
-        t => t.completed
-      );
-    case 'SHOW_ACTIVE':
-      return todos.filter(
-        t => !t.completed
-      );
-    default:
-      return todos;
-  }
-}
-
+//Link presentational component
 const Link = ({
   active,
   children,
@@ -488,6 +397,7 @@ const Link = ({
   );
 };
 
+//FilterLink container component
 class FilterLink extends Component {
   componentDidMount() {
     this.unsubscribe = store.subscribe(() =>
@@ -520,6 +430,87 @@ class FilterLink extends Component {
   }
 }
 
+//Footer component
+const Footer = () => (
+  <p>
+    Show:
+    {' '}
+    <FilterLink
+      filter='SHOW_ALL'
+    >
+      All
+    </FilterLink>
+    {', '}
+    <FilterLink
+      filter='SHOW_ACTIVE'
+    >
+      Active
+    </FilterLink>
+    {', '}
+    <FilterLink
+      filter='SHOW_COMPLETED'
+    >
+      Completed
+    </FilterLink>
+  </p>
+)
+
+//Function to getVisibleTodos
+const getVisibleTodos = (
+  todos,
+  filter
+) => {
+  switch(filter) {
+    case 'SHOW_ALL':
+      return todos;
+    case 'SHOW_COMPLETED':
+      return todos.filter(
+        t => t.completed
+      );
+    case 'SHOW_ACTIVE':
+      return todos.filter(
+        t => !t.completed
+      );
+    default:
+      return todos;
+  }
+}
+
+//Todo presentational component
+const Todo = ({
+  onClick,
+  completed,
+  text
+}) => (
+  <li onClick={onClick}
+      style={{
+        textDecoration: 
+          completed ?
+            'line-through' :
+            'none'
+      }}
+  >
+    {text}
+  </li>
+);
+
+//TodoList presentational component
+const TodoList = ({
+  todos,
+  onTodoClick
+}) => (
+  <ul>
+    {todos.map(todo =>
+      <Todo
+        key={todo.id}
+        {...todo}
+        onClick={() => onTodoClick(todo.id)}
+      />
+    )}
+  </ul>
+);
+
+//VisibleTodoList container component
 class VisibleTodoList extends Component {
   componentDidMount() {
     this.unsubscribe = store.subscribe(() =>
@@ -551,11 +542,37 @@ class VisibleTodoList extends Component {
   }
 }
 
-const todoApp = combineReducers({
-  todos,
-  visibilityFilter
-});
-const store = createStore(todoApp);
+//AddTodo presentation component
+const AddTodo = () => {
+  let input;
+  return (
+    <div>
+      <input ref={node => {
+        input = node;
+      }} />
+      <button onClick={() => {
+        store.dispatch({
+          type: 'ADD_TODO',
+          id: nextTodoId++,
+          text: input.value
+        })
+        input.value = '';
+      }}>
+        Add Todo
+      </button>
+    </div>
+  );
+};
+
+//TodoAppAgain class
+let nextTodoId = 0;
+const TodoAppAgain = () => (
+  <div>
+    <AddTodo />
+    <VisibleTodoList />
+    <Footer />
+  </div>
+);
 
 ReactDOM.render(
   <TodoAppAgain />,
