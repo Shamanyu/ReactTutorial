@@ -261,6 +261,69 @@ import deepFreeze from 'deep-freeze';
 //   store: React.PropTypes.object
 // };
 
+//FilterLink container component
+// class FilterLink extends Component {
+//   componentDidMount() {
+//     const { store } = this.context;
+//     this.unsubscribe = store.subscribe(() =>
+//       this.forceUpdate()
+//     );
+//   }
+//   componentWillUnmount() {
+//     this.unsubscribe();
+//   }
+//   render() {
+//     const props = this.props;
+//     const { store } = this.context;
+//     const state = store.getState();
+//     return (
+//       <Link
+//         active={
+          
+//         }
+//         onClick={
+          
+//         }
+//       >
+//         {props.children}
+//       </Link>
+//     );
+//   }
+// }
+// FilterLink.contextTypes = {
+//   store: React.PropTypes.object
+// };
+
+//VisibleTodoList container component
+// class VisibleTodoList extends Component {
+//   componentDidMount() {
+//     const { store } = this.context;
+//     this.unsubscribe = store.subscribe(() =>
+//       this.forceUpdate()
+//     );
+//   }
+//   componentWillUnmount() {
+//     this.unsubscribe();
+//   }
+//   render() {
+//     const props = this.props;
+//     const { store } = this.context;
+//     const state = store.getState();
+//     return (
+//       <TodoList
+//         todos={
+          
+//         }
+//         onTodoClick={
+//         }
+//       />
+//     );
+//   }
+// }
+// VisibleTodoList.contextTypes = {
+//   store: React.PropTypes.object
+// };
+
 //Reducers
 
 // Reducer for todo
@@ -412,6 +475,7 @@ const Link = ({
   );
 };
 
+//FilterLink container component
 const mapStateToLinkProps = (
   state,
   ownProps
@@ -422,7 +486,6 @@ const mapStateToLinkProps = (
       state.visibilityFilter
   };
 };
-
 const mapDispatchToLinkProps = (
   dispatch,
   ownProps
@@ -436,46 +499,12 @@ const mapDispatchToLinkProps = (
     }
   };
 }
-
 const FilterLink = connect(
   mapStateToLinkProps,
   mapDispatchToLinkProps
 )(Link);
 
-//FilterLink container component
-// class FilterLink extends Component {
-//   componentDidMount() {
-//     const { store } = this.context;
-//     this.unsubscribe = store.subscribe(() =>
-//       this.forceUpdate()
-//     );
-//   }
-//   componentWillUnmount() {
-//     this.unsubscribe();
-//   }
-//   render() {
-//     const props = this.props;
-//     const { store } = this.context;
-//     const state = store.getState();
-//     return (
-//       <Link
-//         active={
-          
-//         }
-//         onClick={
-          
-//         }
-//       >
-//         {props.children}
-//       </Link>
-//     );
-//   }
-// }
-// FilterLink.contextTypes = {
-//   store: React.PropTypes.object
-// };
-
-//Footer component
+//Footer presentation component
 const Footer = () => (
   <p>
     Show:
@@ -521,7 +550,7 @@ const getVisibleTodos = (
   }
 }
 
-//Todo presentational component
+//Todo presentation component
 const Todo = ({
   onClick,
   completed,
@@ -539,7 +568,7 @@ const Todo = ({
   </li>
 );
 
-//TodoList presentational component
+//TodoList presentation component
 const TodoList = ({
   todos,
   onTodoClick
@@ -555,6 +584,7 @@ const TodoList = ({
   </ul>
 );
 
+//VisibleTodoList container component
 const mapStateTodoListToProps = (
   state
 ) => {
@@ -581,36 +611,6 @@ const VisibleTodoList = connect(
   mapStateTodoListToProps,
   mapDispatchTodoListToProps
 )(TodoList);
-
-//VisibleTodoList container component
-// class VisibleTodoList extends Component {
-//   componentDidMount() {
-//     const { store } = this.context;
-//     this.unsubscribe = store.subscribe(() =>
-//       this.forceUpdate()
-//     );
-//   }
-//   componentWillUnmount() {
-//     this.unsubscribe();
-//   }
-//   render() {
-//     const props = this.props;
-//     const { store } = this.context;
-//     const state = store.getState();
-//     return (
-//       <TodoList
-//         todos={
-          
-//         }
-//         onTodoClick={
-//         }
-//       />
-//     );
-//   }
-// }
-// VisibleTodoList.contextTypes = {
-//   store: React.PropTypes.object
-// };
 
 //AddTodo presentation and container component
 let nextTodoId = 0;
@@ -645,6 +645,7 @@ const TodoAppAgain = () => (
   </div>
 );
 
+//Render the application
 ReactDOM.render(
   <Provider store={createStore(todoApp)}>
     <TodoAppAgain />
