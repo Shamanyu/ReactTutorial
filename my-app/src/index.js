@@ -542,7 +542,7 @@ class VisibleTodoList extends Component {
   }
 }
 
-//AddTodo presentation component
+//AddTodo presentation and container component
 const AddTodo = () => {
   let input;
   return (
