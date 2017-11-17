@@ -27,6 +27,8 @@ import './index.css';
 
 import { createStore } from 'redux';
 import { combineReducers } from 'redux';
+import { Provider } from 'react-redux';
+import { connect } from 'react-redux';
 import expect from 'expect';
 import deepFreeze from 'deep-freeze';
 
@@ -244,6 +246,20 @@ import deepFreeze from 'deep-freeze';
 //     );
 //   };
 // }
+
+// class Provider extends Component {
+//   getChildContext() {
+//     return {
+//       store: this.props.store
+//     };
+//   }
+//   render() {
+//     return this.props.children;
+//   }
+// }
+// Provider.childContextTypes = {
+//   store: React.PropTypes.object
+// };
 
 //Reducers
 
@@ -514,42 +530,60 @@ const TodoList = ({
   </ul>
 );
 
-//VisibleTodoList container component
-class VisibleTodoList extends Component {
-  componentDidMount() {
-    const { store } = this.context;
-    this.unsubscribe = store.subscribe(() =>
-      this.forceUpdate()
-    );
-  }
-  componentWillUnmount() {
-    this.unsubscribe();
-  }
-  render() {
-    const props = this.props;
-    const { store } = this.context;
-    const state = store.getState();
-    return (
-      <TodoList
-        todos={
-          getVisibleTodos(
-            state.todos,
-            state.visibilityFilter
-          )
-        }
-        onTodoClick={id =>
-          store.dispatch({
-            type: 'TOGGLE_TODO',
-            id
-          })
-        }
-      />
-    );
-  }
-}
-VisibleTodoList.contextTypes = {
-  store: React.PropTypes.object
+const mapStateToProps = (state) => {
+  return {
+    todos: getVisibleTodos(
+      state.todos,
+      state.visibilityFilter
+    )
+  };
 };
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onTodoClick: id => {
+      dispatch({
+        type: 'TOGGLE_TODO',
+        id
+      })
+    }
+  };
+};
+
+const VisibleTodoList = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TodoList);
+
+//VisibleTodoList container component
+// class VisibleTodoList extends Component {
+//   componentDidMount() {
+//     const { store } = this.context;
+//     this.unsubscribe = store.subscribe(() =>
+//       this.forceUpdate()
+//     );
+//   }
+//   componentWillUnmount() {
+//     this.unsubscribe();
+//   }
+//   render() {
+//     const props = this.props;
+//     const { store } = this.context;
+//     const state = store.getState();
+//     return (
+//       <TodoList
+//         todos={
+          
+//         }
+//         onTodoClick={
+//         }
+//       />
+//     );
+//   }
+// }
+// VisibleTodoList.contextTypes = {
+//   store: React.PropTypes.object
+// };
 
 //AddTodo presentation and container component
 let nextTodoId = 0;
@@ -585,20 +619,6 @@ const TodoAppAgain = () => (
     <Footer />
   </div>
 );
-
-class Provider extends Component {
-  getChildContext() {
-    return {
-      store: this.props.store
-    };
-  }
-  render() {
-    return this.props.children;
-  }
-}
-Provider.childContextTypes = {
-  store: React.PropTypes.object
-};
 
 ReactDOM.render(
   <Provider store={createStore(todoApp)}>
