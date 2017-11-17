@@ -324,6 +324,34 @@ import deepFreeze from 'deep-freeze';
 //   store: React.PropTypes.object
 // };
 
+// Action creators
+
+//Action creator for setVisibilityFilter
+const setVisibilityFilter = (filter) => {
+  return {
+    type: 'SET_VISIBILITY_FILTER',
+    filter
+  };
+};
+
+//Action creator for toggleTodo
+const toggleTodo = (id) => {
+  return {
+    type: 'TOGGLE_TODO',
+    id
+  };
+};
+
+//Action creator for addTodo
+let nextTodoId = 0;
+const addTodo = (text) => {
+  return {
+    type: 'ADD_TODO',
+    id: nextTodoId++,
+    text
+  };
+};
+
 //Reducers
 
 // Reducer for todo
@@ -492,10 +520,9 @@ const mapDispatchToLinkProps = (
 ) => {
   return {
     onClick: () => {
-      dispatch({
-        type: 'SET_VISIBILITY_FILTER',
-        filter: ownProps.filter
-      });
+      dispatch(
+        setVisibilityFilter(ownProps.filter)
+      );
     }
   };
 }
@@ -600,10 +627,7 @@ const mapDispatchTodoListToProps = (
 ) => {
   return {
     onTodoClick: id => {
-      dispatch({
-        type: 'TOGGLE_TODO',
-        id
-      })
+      dispatch(toggleTodo(id));
     }
   };
 };
@@ -613,7 +637,6 @@ const VisibleTodoList = connect(
 )(TodoList);
 
 //AddTodo presentation and container component
-let nextTodoId = 0;
 let AddTodo = ({ dispatch }) => {
   let input;
   return (
@@ -622,11 +645,7 @@ let AddTodo = ({ dispatch }) => {
         input = node;
       }} />
       <button onClick={() => {
-        dispatch({
-          type: 'ADD_TODO',
-          id: nextTodoId++,
-          text: input.value
-        })
+        dispatch(addTodo(input.value));
         input.value = '';
       }}>
         Add Todo
