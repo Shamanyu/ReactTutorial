@@ -6,18 +6,23 @@ import './index.css';
 
 import { createStore } from 'redux';
 import { combineReducers } from 'redux';
+
 import { Provider } from 'react-redux';
 import { connect } from 'react-redux';
+
 import expect from 'expect';
 import deepFreeze from 'deep-freeze';
 
+
 // Action creators
 
-//Action creator for setVisibilityFilter
-const setVisibilityFilter = (filter) => {
+//Action creator for addTodo
+let nextTodoId = 0;
+const addTodo = (text) => {
   return {
-    type: 'SET_VISIBILITY_FILTER',
-    filter
+    type: 'ADD_TODO',
+    id: nextTodoId++,
+    text
   };
 };
 
@@ -29,15 +34,14 @@ const toggleTodo = (id) => {
   };
 };
 
-//Action creator for addTodo
-let nextTodoId = 0;
-const addTodo = (text) => {
+//Action creator for setVisibilityFilter
+const setVisibilityFilter = (filter) => {
   return {
-    type: 'ADD_TODO',
-    id: nextTodoId++,
-    text
+    type: 'SET_VISIBILITY_FILTER',
+    filter
   };
 };
+
 
 //Reducers
 
