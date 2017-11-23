@@ -13,6 +13,7 @@ import { connect } from 'react-redux';
 import expect from 'expect';
 import deepFreeze from 'deep-freeze';
 
+import * as ActionTypes from './actions'
 
 // Action creators
 
@@ -20,7 +21,7 @@ import deepFreeze from 'deep-freeze';
 let nextTodoId = 0;
 const addTodo = (text) => {
   return {
-    type: 'ADD_TODO',
+    type: ActionTypes.ADD_TODO,
     id: nextTodoId++,
     text
   };
@@ -29,7 +30,7 @@ const addTodo = (text) => {
 //Action creator for toggleTodo
 const toggleTodo = (id) => {
   return {
-    type: 'TOGGLE_TODO',
+    type: ActionTypes.TOGGLE_TODO,
     id
   };
 };
@@ -37,7 +38,7 @@ const toggleTodo = (id) => {
 //Action creator for setVisibilityFilter
 const setVisibilityFilter = (filter) => {
   return {
-    type: 'SET_VISIBILITY_FILTER',
+    type: ActionTypes.SET_VISIBILITY_FILTER,
     filter
   };
 };
@@ -48,13 +49,13 @@ const setVisibilityFilter = (filter) => {
 // Reducer for todo
 const todo = (state = [], action) => {
   switch (action.type) {
-    case 'ADD_TODO':
+    case ActionTypes.ADD_TODO:
       return {
         id: action.id,
         text: action.text,
         completed: false
       };
-    case 'TOGGLE_TODO':
+    case ActionTypes.TOGGLE_TODO:
       if (state.id !== action.id) {
         return state;
       }
@@ -70,12 +71,12 @@ const todo = (state = [], action) => {
 // Reducer for todo list
 const todos = (state = [], action) => {
   switch(action.type) {
-    case 'ADD_TODO':
+    case ActionTypes.ADD_TODO:
       return [
         ...state,
         todo(undefined, action)
       ];
-    case 'TOGGLE_TODO':
+    case ActionTypes.TOGGLE_TODO:
       return state.map(t => todo(t, action));
     default:
       return state;
@@ -88,7 +89,7 @@ const visibilityFilter = (
   action
 ) => {
   switch (action.type) {
-    case 'SET_VISIBILITY_FILTER':
+    case ActionTypes.SET_VISIBILITY_FILTER:
       return action.filter;
     default:
       return state;
@@ -101,7 +102,7 @@ const visibilityFilter = (
 const testAddTodo = () => {
   const stateBefore = [];
   const action = {
-    type: 'ADD_TODO',
+    type: ActionTypes.ADD_TODO,
     id: 0,
     text: 'Learn Redux'
   };
@@ -136,7 +137,7 @@ const testToggleTodo = () => {
     }
   ];
   const action = {
-    type: 'TOGGLE_TODO',
+    type: ActionTypes.TOGGLE_TODO,
     id: 1
   };
   const stateAfter = [
